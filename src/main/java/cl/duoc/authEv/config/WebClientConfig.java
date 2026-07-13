@@ -1,5 +1,6 @@
 package cl.duoc.authEv.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -8,9 +9,11 @@ import org.springframework.web.reactive.function.client.WebClient;
 public class WebClientConfig {
 
     @Bean
-    public WebClient webClient() {
+    public WebClient webClient(
+            @Value("${usuario.service.url}") String usuarioServiceUrl) {
+
         return WebClient.builder()
-                .baseUrl("http://localhost:8081/api/v1/usuarios")
+                .baseUrl(usuarioServiceUrl)
                 .build();
     }
 }
